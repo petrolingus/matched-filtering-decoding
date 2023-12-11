@@ -57,10 +57,10 @@ def process():
     core = Core(sampling_frequency, sequence_length, baud_rate, carrier_frequency, snr, enable_noise)
     core.process()
 
-    dpg.set_value('signal_series0', [core.correlate_xis, core.correlate_yis[0]])
-    dpg.set_value('signal_series1', [core.correlate_xis, core.correlate_yis[1]])
-    dpg.set_value('signal_series2', [core.correlate_xis, core.correlate_yis[2]])
-    dpg.set_value('signal_series3', [core.correlate_xis, core.correlate_yis[3]])
+    dpg.set_value('series0', [core.correlate_xis, core.correlate_yis[0]])
+    dpg.set_value('series1', [core.correlate_xis, core.correlate_yis[1]])
+    dpg.set_value('series2', [core.correlate_xis, core.correlate_yis[2]])
+    dpg.set_value('series3', [core.correlate_xis, core.correlate_yis[3]])
     dpg.fit_axis_data('signal_x_axis')
     dpg.fit_axis_data('signal_y_axis')
 
@@ -114,11 +114,10 @@ with dpg.window() as main_window:
                             dpg.add_plot_legend()
                             dpg.add_plot_axis(dpg.mvXAxis, label="time [ms]", tag="signal_x_axis")
                             dpg.add_plot_axis(dpg.mvYAxis, label="y", tag="signal_y_axis")
-                            dpg.add_line_series([], [], parent="signal_y_axis", tag="signal_series")
-                            dpg.add_line_series([], [], parent="signal_y_axis", tag="signal_series0")
-                            dpg.add_line_series([], [], parent="signal_y_axis", tag="signal_series1")
-                            dpg.add_line_series([], [], parent="signal_y_axis", tag="signal_series2")
-                            dpg.add_line_series([], [], parent="signal_y_axis", tag="signal_series3")
+                            dpg.add_line_series([], [], parent="signal_y_axis", tag="series0", label='00')
+                            dpg.add_line_series([], [], parent="signal_y_axis", tag="series1", label='01')
+                            dpg.add_line_series([], [], parent="signal_y_axis", tag="series2", label='10')
+                            dpg.add_line_series([], [], parent="signal_y_axis", tag="series3", label='11')
             with dpg.tab(label="Research", tag="research_tab"):
                 with dpg.child_window(tag="research_window", border=False):
                     with dpg.subplots(rows=1, columns=1, no_title=True, width=-1, height=-1):
